@@ -1,6 +1,7 @@
 package de.wagnerj27.simplesword;
 
 import javafx.application.Application;
+
 import javafx.scene.input.KeyCode;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -17,19 +18,27 @@ public class GameGUI extends Application{
 	private int tileSize;
 	private int canvasWidth;
 	private int canvasHeight;
+	private int windowWidth;
+	private int windowHeight;
+	private int gameWidth;
+	private int gameHeight;
 	private MovementController movementController;
 		@Override
 		public void start(Stage primaryStage) throws Exception {
 			// TODO Auto-generated method stub
+			windowWidth = 800;
+			windowHeight = 800;
+			gameWidth = 800;
+			gameHeight = 650;
 			tileSize = 80;
+			
 			BorderPane root = new BorderPane();
 			room = new Room(8,7);
 			player = new Player(3, 4);
 			movementController = new MovementController();
+			root.setStyle("-fx-background-color: black;");
 			
-			canvasWidth  = room.getWidth()  * tileSize;
-			canvasHeight = room.getHeight() * tileSize;	
-			canvas = new Canvas(canvasWidth, canvasHeight);
+			canvas = new Canvas(gameWidth, gameHeight);
 			roomRenderer = new RoomRenderer(room, canvas,tileSize,player);
 			roomRenderer.render();
 			
@@ -38,7 +47,7 @@ public class GameGUI extends Application{
 			
 			
 			
-			mainScene = new Scene(root,800,800);
+			mainScene = new Scene(root, windowWidth, windowHeight);
 	         
 			mainScene.setOnKeyPressed(event ->{
 				if(event.getCode()==KeyCode.W) {
