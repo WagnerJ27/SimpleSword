@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main {
 	public static void main(String[]args) {
 		Application.launch(GameGUI.class, args);
-		
+
 //		Room room = new Room(8,7);
 //		Player player = new Player(3, 3);
 //		MovementController controller = new MovementController();

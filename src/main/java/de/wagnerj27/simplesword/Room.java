@@ -29,8 +29,8 @@ public class Room {
 				}
 			}
 		}
-		tiles[2][3] = new Wall();
-		tiles[2][4] = new Wall();
+	//	tiles[2][3] = new Wall();
+	//	tiles[2][4] = new Wall();
 	}
 	
 	

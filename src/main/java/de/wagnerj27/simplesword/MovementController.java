@@ -2,7 +2,7 @@ package de.wagnerj27.simplesword;
 
 public class MovementController {
 	
-	public void moveForward(Player player, Room room) {
+	public boolean moveForward(Player player, Room room) {
 		Direction direction = player.getDirection();
 		Position position = player.getPosition();
 		int x = position.getX();
@@ -44,7 +44,10 @@ public class MovementController {
 			
 			if(tile.isWalkable()) {
 				player.setPosition(targetX, targetY);
+				return true;
 			}
+			
 		}
+		return false;
 	}
 }
