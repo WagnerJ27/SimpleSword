@@ -3,17 +3,18 @@ package de.wagnerj27.simplesword;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class RoomRenderer {
 
-    private final Room room;
+    private final DungeonLevel room;
     private final Canvas canvas;
     private final int tileSize;
     private final GraphicsContext graphicsContext;
     private final Player player;
 
     // Creates a renderer for the given room, canvas and player.
-    public RoomRenderer(Room room, Canvas canvas, int tileSize, Player player) {
+    public RoomRenderer(DungeonLevel room, Canvas canvas, int tileSize, Player player) {
         this.room = room;
         this.canvas = canvas;
         this.tileSize = tileSize;
@@ -595,5 +596,35 @@ public class RoomRenderer {
                 canvas.getWidth(),
                 canvas.getHeight()
         );
+    }
+    
+    
+    public void renderLevelTest() {
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        gc.setFill(Color.WHITE);
+
+        double tileWidth = canvas.getWidth() / room.getWidth();
+        double tileHeight = canvas.getHeight() / room.getHeight();
+
+        gc.setFont(Font.font("Monospaced", Math.min(tileWidth, tileHeight)));
+
+        for (int y = 0; y < room.getHeight(); y++) {
+
+            for (int x = 0; x < room.getWidth(); x++) {
+
+                if (room.getTile(x, y) instanceof Wall) {
+
+                    gc.fillText(
+                        "#",
+                        x * tileWidth,
+                        (y + 1) * tileHeight
+                    );
+                }
+            }
+        }
     }
 }

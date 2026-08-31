@@ -2,7 +2,7 @@ package de.wagnerj27.simplesword;
 
 public class MovementController {
 	
-	public boolean moveForward(Player player, Room room) {
+	public boolean moveForward(Player player, DungeonLevel room) {
 		Direction direction = player.getDirection();
 		Position position = player.getPosition();
 		int x = position.getX();

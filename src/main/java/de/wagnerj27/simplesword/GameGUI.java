@@ -19,7 +19,7 @@ public class GameGUI extends Application {
 
     private Scene mainScene;
 
-    private Room room;
+    private DungeonLevel room;
     private RoomRenderer roomRenderer;
     private Canvas canvas;
     private Player player;
@@ -49,8 +49,8 @@ public class GameGUI extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // Set the window dimensions.
-        windowWidth = 800;
-        windowHeight = 800;
+        windowWidth = 1200;
+        windowHeight = 1000;
 
         // Set the game area dimensions.
         gameWidth = 800;
@@ -60,10 +60,10 @@ public class GameGUI extends Application {
         tileSize = 80;
 
         // Create the player.
-        player = new Player(3, 4);
+        player = new Player(1, 1);
 
         // Create the room.
-        room = new Room(8, 7);
+        room = new DungeonLevel(21, 49);
 
         // Create the movement controller.
         movementController = new MovementController();
@@ -156,13 +156,13 @@ public class GameGUI extends Application {
                 updatePlayerStatus();
 
                 // Start combat if movement succeeded and the random chance occurs.
-                if (moved && shouldStartCombat()) {
-
-                    // Start combat.
-                    combat(mainScene.getWindow() instanceof Stage
-                            ? (Stage) mainScene.getWindow()
-                            : null, player);
-                }
+//                if (moved && shouldStartCombat()) {
+//
+//                    // Start combat.
+//                    combat(mainScene.getWindow() instanceof Stage
+//                            ? (Stage) mainScene.getWindow()
+//                            : null, player);
+//                }
             }
 
             // Turn the player left when A is pressed.
