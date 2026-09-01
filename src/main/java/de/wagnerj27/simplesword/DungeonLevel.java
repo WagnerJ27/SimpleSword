@@ -4,12 +4,17 @@ public class DungeonLevel {
 	private int height;
 	private int width;
 	private Tile[][] tiles;
-
 	
-	public DungeonLevel(int height, int width) {
+	
+	public DungeonLevel(int height, int width, int level) {
 		this.height= height;
 		this.width = width;
-		initializeLevelOne();
+		if(level ==1) {
+			initializeLevelOne();
+		}
+		if(level ==2) {
+			intitializeLevelTwo();
+		}
 	}
 	
 
@@ -138,14 +143,43 @@ public class DungeonLevel {
 
 	        tiles[i][40] = new Wall();
 	    }
+	    
+	   //Place stairs to level 2
+	    tiles[17][47] = new Stair();
 	}
 	
-	
+	private void intitializeLevelTwo() {
+	    tiles = new Tile[height][width];
+
+	    // Create the outer border of the level.
+	    for (int i = 0; i < height; i++) {
+
+	        for (int j = 0; j < width; j++) {
+
+	            if (i == 0 || i == height - 1) {
+
+	                tiles[i][j] = new Wall();
+
+	            } else if (j == 0 || j == width - 1) {
+
+	                tiles[i][j] = new Wall();
+
+	            } else {
+
+	                tiles[i][j] = new Floor();
+	            }
+	        }
+	    }
+	}
 	public boolean isInside(int x, int y) {
 			if((y>=0 && y< height) && (x>=0 && x< width)) {
 				return true;
 			}
 		return false;
+	}
+	
+	public boolean isStairs(int x, int y) {
+	    return getTile(x, y) instanceof Stair;
 	}
 	
 	public Tile getTile(int x, int y) {

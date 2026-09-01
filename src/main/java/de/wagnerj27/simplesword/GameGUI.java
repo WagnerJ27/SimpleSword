@@ -19,11 +19,13 @@ public class GameGUI extends Application {
 
     private Scene mainScene;
 
-    private DungeonLevel room;
+    private DungeonLevel level;
     private RoomRenderer roomRenderer;
     private Canvas canvas;
     private Player player;
 
+    private int gameLevel =1;
+    
     private int tileSize;
 
     private int canvasWidth;
@@ -40,6 +42,7 @@ public class GameGUI extends Application {
     private Enemy enemy;
 
     private Label playerStatus;
+    
 
     private static final int COMBAT_CHANCE = 10;
 
@@ -62,8 +65,8 @@ public class GameGUI extends Application {
         // Create the player.
         player = new Player(1, 1);
 
-        // Create the room.
-        room = new DungeonLevel(21, 49);
+        // Create level 1.
+        level = new DungeonLevel(21, 49,gameLevel);
 
         // Create the movement controller.
         movementController = new MovementController();
@@ -90,16 +93,16 @@ public class GameGUI extends Application {
         // Create the game canvas.
         canvas = new Canvas(gameWidth, gameHeight);
 
-        // Create the room renderer.
+        // Create the dungeon renderer.
         roomRenderer = new RoomRenderer(
-                room,
+                level,
                 canvas,
                 tileSize,
                 player
         );
 
-        // Render the room.
-        roomRenderer.render();
+        // Render the current level.
+        roomRenderer.render2D();
 
         // Create the player status label.
         playerStatus = new Label();
@@ -147,14 +150,29 @@ public class GameGUI extends Application {
 
                 // Try to move the player.
                 boolean moved =
-                        movementController.moveForward(player, room);
+                        movementController.moveForward(player, level);
+                
 
-                // Update the room rendering.
-                roomRenderer.render();
+                // Update the level rendering.
+                roomRenderer.render2D();
 
                 // Update the player status.
                 updatePlayerStatus();
 
+                //Check if player moved on stairs to next level
+                if(moved) {
+                	if(level.isStairs(player.getPosition().getX(), player.getPosition().getY())) {
+                		System.out.println("Stairs reached");
+
+                        gameLevel++;
+
+                        System.out.println("Entered level " + gameLevel);
+
+                        loadLevel();
+                		
+                	}
+                }
+                
                 // Start combat if movement succeeded and the random chance occurs.
 //                if (moved && shouldStartCombat()) {
 //
@@ -171,8 +189,8 @@ public class GameGUI extends Application {
                 // Turn the player left.
                 player.turnLeft();
 
-                // Update the room rendering.
-                roomRenderer.render();
+                // Update the level rendering.
+                roomRenderer.render2D();
             }
 
             // Turn the player right when D is pressed.
@@ -181,10 +199,26 @@ public class GameGUI extends Application {
                 // Turn the player right.
                 player.turnRight();
 
-                // Update the room rendering.
-                roomRenderer.render();
+                // Update the level rendering.
+                roomRenderer.render2D();
             }
         });
+    }
+    
+    private void loadLevel() {
+    	if(gameLevel==1) {
+    		level = new DungeonLevel(21, 49, gameLevel);
+    	}else if(gameLevel ==2) {
+        level = new DungeonLevel(21, 49, gameLevel);
+    	}
+        roomRenderer = new RoomRenderer(
+                level,
+                canvas,
+                tileSize,
+                player
+        );
+
+        roomRenderer.render2D();
     }
 
     // Update the player status label with the current values.

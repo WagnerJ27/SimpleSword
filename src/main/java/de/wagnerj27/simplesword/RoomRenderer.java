@@ -599,32 +599,81 @@ public class RoomRenderer {
     }
     
     
-    public void renderLevelTest() {
+    public void render2D() {
 
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        // Clear the previous frame.
+        gc.clearRect(
+                0,
+                0,
+                canvas.getWidth(),
+                canvas.getHeight()
+        );
 
-        gc.setFill(Color.WHITE);
+        // Draw the black background.
+        gc.setFill(Color.BLACK);
+        gc.fillRect(
+                0,
+                0,
+                canvas.getWidth(),
+                canvas.getHeight()
+        );
 
-        double tileWidth = canvas.getWidth() / room.getWidth();
-        double tileHeight = canvas.getHeight() / room.getHeight();
+        // Calculate the size of one tile.
+        double tileWidth =
+                canvas.getWidth() / room.getWidth();
 
-        gc.setFont(Font.font("Monospaced", Math.min(tileWidth, tileHeight)));
+        double tileHeight =
+                canvas.getHeight() / room.getHeight();
 
+        // Draw all tiles.
         for (int y = 0; y < room.getHeight(); y++) {
 
             for (int x = 0; x < room.getWidth(); x++) {
 
-                if (room.getTile(x, y) instanceof Wall) {
+                // Get the current tile.
+                Tile tile = room.getTile(x, y);
 
-                    gc.fillText(
-                        "#",
-                        x * tileWidth,
-                        (y + 1) * tileHeight
+                // Draw walls.
+                if (tile instanceof Wall) {
+
+                    gc.setFill(Color.WHITE);
+
+                    gc.fillRect(
+                            x * tileWidth,
+                            y * tileHeight,
+                            tileWidth,
+                            tileHeight
+                    );
+                }
+                //Render stairs for testing
+                if(tile instanceof Stair) {
+                    gc.setFill(Color.RED);
+
+                    gc.fillRect(
+                            x * tileWidth,
+                            y * tileHeight,
+                            tileWidth,
+                            tileHeight
                     );
                 }
             }
         }
+
+        // Draw the player.
+        Position position = player.getPosition();
+
+        double playerX = position.getX() * tileWidth;
+        double playerY = position.getY() * tileHeight;
+
+        gc.setFill(Color.WHITE);
+
+        gc.fillOval(
+                playerX + tileWidth * 0.2,
+                playerY + tileHeight * 0.2,
+                tileWidth * 0.6,
+                tileHeight * 0.6
+        );
     }
 }

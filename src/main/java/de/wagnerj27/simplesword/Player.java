@@ -12,7 +12,7 @@ public class Player {
 	
 	public Player(int x, int y) {
 		playerPosition = new Position(x,y);
-		playerDirection = Direction.NORTH;
+		playerDirection = Direction.EAST;
 		level = 1;
 		exp = 0;
 		maxHP = 20;
