@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class GameGUI extends Application {
 
     private Scene mainScene;
-
+    private Stage primaryStage;
     private DungeonLevel level;
     private RoomRenderer roomRenderer;
     private Canvas canvas;
@@ -50,7 +50,7 @@ public class GameGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+    	this.primaryStage = primaryStage;
         // Set the window dimensions.
         windowWidth = 1200;
         windowHeight = 1000;
@@ -172,6 +172,12 @@ public class GameGUI extends Application {
                 		
                 	}
                 }
+                //Check if the player reached the exit and finished escaped the dungeon
+                if(moved) {
+                	if(level.isDungeonExit(player.getPosition().getX(), player.getPosition().getY())) {
+                		showVictoryScreen(primaryStage);
+                	}
+                }
                 
                 // Start combat if movement succeeded and the random chance occurs.
 //                if (moved && shouldStartCombat()) {
@@ -210,6 +216,10 @@ public class GameGUI extends Application {
     		level = new DungeonLevel(21, 49, gameLevel);
     	}else if(gameLevel ==2) {
         level = new DungeonLevel(21, 49, gameLevel);
+        player.setPosition(1, 1);
+    	}else if(gameLevel ==3) {
+    		level = new DungeonLevel(7,14,gameLevel);
+    		player.setPosition(1, 3);
     	}
         roomRenderer = new RoomRenderer(
                 level,
@@ -501,6 +511,22 @@ public class GameGUI extends Application {
                 "The player has been defeated."
         );
 
+        // Close the game after the dialog is closed.
+        alert.setOnHidden(event -> {
+            stage.close();
+        });
+
+        // Show the game over dialog.
+        alert.show();
+    }
+    
+    private void showVictoryScreen(Stage stage) {
+    	Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    	
+    	alert.setTitle("Congratulation!!!");
+    	alert.setHeaderText("Congratulation Player!");
+    	alert.setContentText("You beat the last enemy and reached the Dungeon Exit!");
+    	
         // Close the game after the dialog is closed.
         alert.setOnHidden(event -> {
             stage.close();

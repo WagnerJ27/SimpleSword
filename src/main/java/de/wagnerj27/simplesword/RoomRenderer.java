@@ -658,6 +658,17 @@ public class RoomRenderer {
                             tileHeight
                     );
                 }
+                
+                if(tile instanceof DungeonExit) {
+                    gc.setFill(Color.BLUE);
+
+                    gc.fillRect(
+                            x * tileWidth,
+                            y * tileHeight,
+                            tileWidth,
+                            tileHeight
+                    );
+                }
             }
         }
 

@@ -15,6 +15,9 @@ public class DungeonLevel {
 		if(level ==2) {
 			intitializeLevelTwo();
 		}
+		if(level ==3) {
+			initializeLevelThree();
+		}
 	}
 	
 
@@ -57,8 +60,8 @@ public class DungeonLevel {
 	        tiles[16][i] = new Wall();
 	    }
 
-	    // Wall from (18,9) to (18,18).
-	    for (int i = 9; i <= 18; i++) {
+	    // Wall from (18,10) to (18,19).
+	    for (int i = 10; i <= 19; i++) {
 
 	        tiles[18][i] = new Wall();
 	    }
@@ -80,8 +83,8 @@ public class DungeonLevel {
 	        tiles[11][i] = new Wall();
 	    }
 
-	    // Wall from (18,32) to (18,38).
-	    for (int i = 32; i <= 38; i++) {
+	    // Wall from (18,31) to (18,39).
+	    for (int i = 31; i <= 39; i++) {
 
 	        tiles[18][i] = new Wall();
 	    }
@@ -170,7 +173,173 @@ public class DungeonLevel {
 	            }
 	        }
 	    }
+	    
+	    //Horizontal Walls
+	    
+	    //Wall from (5,1) to (5,15) with a floor at (5,7)
+	    for(int i=1; i<=15;i++){
+	    	if(i==7) {
+	    		continue;
+	    	}
+	    	tiles[5][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (10,7) to (10,15)
+	    for(int i=7; i<=15;i++){
+	    	
+	    	tiles[10][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (14,1) to (14,7)
+	    for(int i=1; i<=7;i++){
+	    	
+	    	tiles[14][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (18,1) to (18,15)
+	    for(int i=1; i<=15;i++){
+	    	
+	    	tiles[18][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (3,23) to (3,47) with floors at (3,30) to (3,32) and (3,42) (3,44)
+	    for(int i=23; i<=47;i++){
+	    	if((i>=30 && i<=32) || (i>=42 && i<=44)) {
+	    		continue;
+	    	}
+	    	tiles[3][i] = new Wall();
+	    	
+	    }
+	    
+	    
+	    //Wall from (9,23) to (9,31)
+	    for(int i=23; i<=31;i++){
+	    	
+	    	tiles[9][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (12,23) to (12,30)
+	    for(int i=23; i<=30;i++){
+	    	
+	    	tiles[12][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (12,39) to (12,47) and Wall from (6,39) to (6,47)
+	    for(int i=39; i<=47;i++){
+	    	
+	    	tiles[12][i] = new Wall();
+	    	tiles[6][i] = new Wall();
+	    }
+	    
+	    //Wall from (18,23) to (18,39)
+	    for(int i=23; i<=39;i++){
+	    	
+	    	tiles[18][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (14,31) to (14,39)
+	    for(int i=31; i<=39;i++){
+	    	
+	    	tiles[14][i] = new Wall();
+	    	
+	    }
+	    
+	    //Wall from (16,39) to (16,47)
+	    for(int i=39; i<=47;i++){
+	    	
+	    	tiles[16][i] = new Wall();
+	    	
+	    }
+	    
+	    
+	    //Vertikal Walls
+	    
+	    
+	    
+	    //Wall from (1,15) to (4,15)
+	    for(int i=1; i<=4;i++){
+	    	
+	    	tiles[i][15] = new Wall();
+	    	
+	    }
+	    
+	    //Wall at (8,15) and (9,15)
+	    tiles[8][15] = new Wall();
+	    tiles[9][15] = new Wall();
+	    
+	    //Walls from (12,15) to (14,15)
+	    tiles[12][15] = new Wall();
+	    tiles[13][15] = new Wall();
+	    tiles[14][15] = new Wall();
+	    
+	    
+	    //Walls at (16,15) and (17,15)
+	    tiles[16][15] = new Wall();
+	    tiles[17][15] = new Wall();
+	    
+	    
+	    //Wall from (4,23) to (17,23)
+	    for(int i=4; i<=17;i++){
+	    	
+	    	tiles[i][23] = new Wall();
+	    	
+	    }
+	    
+	    //Walls from (6,31) to (8,31)
+	    tiles[6][31] = new Wall();
+	    tiles[7][31] = new Wall();
+	    tiles[8][31] = new Wall();
+	    
+	    //Wall at (15,31) and (16,31)
+	    tiles[15][31] = new Wall();
+	    tiles[16][31] = new Wall();
+	    
+	    
+	    //Wall at (15,39) and (17,39)
+	    tiles[15][39] = new Wall();
+	    tiles[17][39] = new Wall();
+	    
+	    
+	    //Splace Staits to next level at (15,32)
+	    tiles[15][32] = new Stair();
 	}
+	
+	private void initializeLevelThree() {
+		tiles = new Tile[height][width];
+		
+		//Place outer Walls and floor
+	    for (int i = 0; i < height; i++) {
+
+	        for (int j = 0; j < width; j++) {
+
+	            if (i == 0 || i == height - 1) {
+
+	                tiles[i][j] = new Wall();
+
+	            } else if (j == 0 || j == width - 1) {
+
+	                tiles[i][j] = new Wall();
+
+	            } else {
+
+	                tiles[i][j] = new Floor();
+	            }
+	        }
+	    }
+	    
+	    //Place DungeonExit at (3,13)
+	    tiles[3][13] = new DungeonExit();
+	    
+		
+	}
+	
 	public boolean isInside(int x, int y) {
 			if((y>=0 && y< height) && (x>=0 && x< width)) {
 				return true;
@@ -180,6 +349,10 @@ public class DungeonLevel {
 	
 	public boolean isStairs(int x, int y) {
 	    return getTile(x, y) instanceof Stair;
+	}
+	
+	public boolean isDungeonExit(int x, int y) {
+		return getTile(x,y) instanceof DungeonExit;
 	}
 	
 	public Tile getTile(int x, int y) {
