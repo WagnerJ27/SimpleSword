@@ -649,7 +649,7 @@ public class RoomRenderer {
                 }
                 //Render stairs for testing
                 if(tile instanceof Stair) {
-                    gc.setFill(Color.RED);
+                    gc.setFill(Color.BLUE);
 
                     gc.fillRect(
                             x * tileWidth,
@@ -660,7 +660,19 @@ public class RoomRenderer {
                 }
                 
                 if(tile instanceof DungeonExit) {
-                    gc.setFill(Color.BLUE);
+                    gc.setFill(Color.GREEN);
+
+                    gc.fillRect(
+                            x * tileWidth,
+                            y * tileHeight,
+                            tileWidth,
+                            tileHeight
+                    );
+                }
+                
+                
+                if(tile instanceof BossTile) {
+                    gc.setFill(Color.RED);
 
                     gc.fillRect(
                             x * tileWidth,

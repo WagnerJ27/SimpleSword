@@ -172,6 +172,13 @@ public class GameGUI extends Application {
                 		
                 	}
                 }
+                
+                if(moved) {
+                	if(level.isBossTile(player.getPosition().getX(), player.getPosition().getY())) {
+                		System.out.println("Boss Tile betreten");
+                	}
+                }
+                
                 //Check if the player reached the exit and finished escaped the dungeon
                 if(moved) {
                 	if(level.isDungeonExit(player.getPosition().getX(), player.getPosition().getY())) {

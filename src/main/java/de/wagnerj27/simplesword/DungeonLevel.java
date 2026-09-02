@@ -337,7 +337,8 @@ public class DungeonLevel {
 	    //Place DungeonExit at (3,13)
 	    tiles[3][13] = new DungeonExit();
 	    
-		
+		//Playe Boss at (3,12)
+	    tiles[3][12]  = new BossTile();
 	}
 	
 	public boolean isInside(int x, int y) {
@@ -353,6 +354,10 @@ public class DungeonLevel {
 	
 	public boolean isDungeonExit(int x, int y) {
 		return getTile(x,y) instanceof DungeonExit;
+	}
+	
+	public boolean isBossTile(int x,int y) {
+		return getTile(x,y) instanceof BossTile;
 	}
 	
 	public Tile getTile(int x, int y) {
