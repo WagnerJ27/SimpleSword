@@ -18,6 +18,15 @@ public class Enemy {
 	if(randomEnemy == 3) {
 		initializeSpider();
 	}
+	if(randomEnemy == 4) {
+		initializeZombie();
+	}
+	if(randomEnemy == 5) {
+		initializeGoblin();
+	}
+	if(randomEnemy == 6) {
+		initializeGoblinKing();
+	}
 	}
 	
 	
@@ -42,6 +51,33 @@ public class Enemy {
 	
 	private void initializeSpider() {
 		name = "Spider";
+		rewardEXP = 10;
+		maxHP = 10;
+		currentHP = 10;
+		strength = 1;
+		defense = 2;
+	}
+	
+	private void initializeZombie() {
+		name = "Zombie";
+		rewardEXP = 10;
+		maxHP = 10;
+		currentHP = 10;
+		strength = 1;
+		defense = 2;
+	}
+	
+	private void initializeGoblin() {
+		name = "Goblin";
+		rewardEXP = 10;
+		maxHP = 10;
+		currentHP = 10;
+		strength = 1;
+		defense = 2;
+	}
+	
+	private void initializeGoblinKing() {
+		name = "GoblinKing";
 		rewardEXP = 10;
 		maxHP = 10;
 		currentHP = 10;

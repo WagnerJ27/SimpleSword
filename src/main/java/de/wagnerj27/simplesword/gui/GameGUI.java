@@ -115,7 +115,7 @@ public class GameGUI extends Application {
         // Create the player status label.
         playerStatus = new Label();
 
-        Label controls = new Label("W - forwards | A and D - Turn | P - Open character sheet");
+        Label controls = new Label("W - forwards | A and D - Turn | P - Open character sheet | I - Open inventory");
         controls.setTextFill(Color.WHITE);
         controls.setAlignment(Pos.CENTER);
         controls.setStyle("-fx-font-size: 24px;");
@@ -191,10 +191,11 @@ public class GameGUI extends Application {
                 		
                 	}
                 }
-                
+                //Check if player stepped on BossTile and if yes initiate combat with the boss
                 if(moved) {
                 	if(level.isBossTile(player.getPosition().getX(), player.getPosition().getY())) {
-                		System.out.println("Boss Tile betreten");
+                		combat(player,true);
+                		
                 	}
                 }
                 
@@ -206,12 +207,10 @@ public class GameGUI extends Application {
                 }
                 
                 // Start combat if movement succeeded and the random chance occurs.
+                if(gameLevel == 1 || gameLevel == 2) {
                 if (moved && shouldStartCombat()) {
-
-                    // Start combat.
-                    combat(mainScene.getWindow() instanceof Stage
-                            ? (Stage) mainScene.getWindow()
-                            : null, player);
+                	combat(player,false);
+                }
                 }
             }
 
@@ -343,7 +342,7 @@ public class GameGUI extends Application {
     }
 
     // Create and display the combat scene.
-    public void combat(Stage stage, Player player) {
+    public void combat(Player player, boolean isBossBattle) {
 
         // Create the combat layout.
         BorderPane combatRoot = new BorderPane();
@@ -351,9 +350,12 @@ public class GameGUI extends Application {
         // Set the combat background to black.
         combatRoot.setStyle("-fx-background-color: black;");
 
-        // Create a new enemy.
-        
-        Enemy enemy = new Enemy(getRandomEnemyType());
+        Enemy enemy;
+        if(!isBossBattle) {
+        	  enemy = new Enemy(getRandomEnemyType(gameLevel));
+        }else {
+        	  enemy = new Enemy(6);
+        }
 
         // Create the combat controller.
         Combat combat = new Combat(player, enemy);
@@ -388,13 +390,13 @@ public class GameGUI extends Application {
                 combat,
                 enemy,
                 player,
-                stage,
+                primaryStage,
                 playerBox,
                 enemyBox
         );
 
         // Display the combat scene.
-        stage.setScene(combatScene);
+        primaryStage.setScene(combatScene);
     }
 
     // Create the enemy status display.
@@ -648,8 +650,20 @@ public class GameGUI extends Application {
         return randomNumber == 1;
     }
     
-    private int getRandomEnemyType() {
-        return (int) (Math.random() * 3) + 1;
+    private int getRandomEnemyType(int gameLevel) {
+        switch (gameLevel) {
+        case 1:
+            return (int) (Math.random() * 3) + 1;
+
+        case 2:
+            return (int) (Math.random() * 3) + 3;
+
+        case 3:
+            return 5;
+            
+        default:
+        	return 1;
+    }
     }
 }
 
