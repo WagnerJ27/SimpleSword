@@ -8,18 +8,47 @@ public class Enemy {
 	private int defense;
 	private String name;
 	
-	public Enemy() {
-	initializeBat();
+	public Enemy(int randomEnemy) {
+	if(randomEnemy == 1) {
+		initializeBat();
+	}
+	if(randomEnemy == 2) {
+		initializeSnake();
+	}
+	if(randomEnemy == 3) {
+		initializeSpider();
+	}
 	}
 	
-private void initializeBat() {
-	name = "Bat";
-	rewardEXP = 10;
-	maxHP = 10;
-	currentHP = 10;
-	strength = 8;
-	defense = 2;
-}
+	
+	
+	private void initializeBat() {
+		name = "Bat";
+		rewardEXP = 10;
+		maxHP = 10;
+		currentHP = 10;
+		strength = 1;
+		defense = 2;
+	}
+
+	public void initializeSnake() {
+		name = "Snake";
+		rewardEXP = 10;
+		maxHP = 10;
+		currentHP = 10;
+		strength = 1;
+		defense = 2;
+	}
+	
+	private void initializeSpider() {
+		name = "Spider";
+		rewardEXP = 10;
+		maxHP = 10;
+		currentHP = 10;
+		strength = 1;
+		defense = 2;
+	}
+
 		public String getName() {
 			return name;
 		}

@@ -41,6 +41,9 @@ public class GameGUI extends Application {
 
     private int gameWidth;
     private int gameHeight;
+    
+    private Insets topPadding = new Insets(50,0,0,0);
+    private Insets bottomPadding = new Insets(0,0,50,0);
 
     private Scene combatScene;
     private Combat combat;
@@ -138,6 +141,8 @@ public class GameGUI extends Application {
 
         root.setBottom(controls);
         
+        playerStatus.setPadding(topPadding);
+        controls.setPadding(bottomPadding);
         // Center the player status.
         root.setAlignment(playerStatus, Pos.CENTER);
         root.setAlignment(controls, Pos.CENTER);
@@ -279,6 +284,9 @@ public class GameGUI extends Application {
     	characterRoot.setCenter(stats);
     	characterRoot.setBottom(exit);
     	
+    	characterSheet.setPadding(topPadding);
+    	exit.setPadding(bottomPadding);
+    	
     	characterRoot.setAlignment(characterSheet, Pos.CENTER);
     	characterRoot.setAlignment(stats, Pos.CENTER);
     	characterRoot.setAlignment(exit, Pos.CENTER);
@@ -344,7 +352,8 @@ public class GameGUI extends Application {
         combatRoot.setStyle("-fx-background-color: black;");
 
         // Create a new enemy.
-        Enemy enemy = new Enemy();
+        
+        Enemy enemy = new Enemy(getRandomEnemyType());
 
         // Create the combat controller.
         Combat combat = new Combat(player, enemy);
@@ -637,6 +646,10 @@ public class GameGUI extends Application {
 
         // Start combat only when the generated number is 1.
         return randomNumber == 1;
+    }
+    
+    private int getRandomEnemyType() {
+        return (int) (Math.random() * 3) + 1;
     }
 }
 
