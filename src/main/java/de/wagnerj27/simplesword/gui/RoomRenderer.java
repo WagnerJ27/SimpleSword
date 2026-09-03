@@ -1,5 +1,14 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.gui;
 
+
+import de.wagnerj27.simplesword.Position;
+import de.wagnerj27.simplesword.dungeon.BossTile;
+import de.wagnerj27.simplesword.dungeon.DungeonExit;
+import de.wagnerj27.simplesword.dungeon.DungeonLevel;
+import de.wagnerj27.simplesword.dungeon.Stair;
+import de.wagnerj27.simplesword.dungeon.Tile;
+import de.wagnerj27.simplesword.dungeon.Wall;
+import de.wagnerj27.simplesword.entities.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

@@ -1,4 +1,7 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.entities;
+
+import de.wagnerj27.simplesword.Position;
+import de.wagnerj27.simplesword.movement.Direction;
 
 public class Player {
 	private Position playerPosition;

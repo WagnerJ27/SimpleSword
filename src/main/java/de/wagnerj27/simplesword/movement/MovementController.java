@@ -1,4 +1,9 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.movement;
+
+import de.wagnerj27.simplesword.Position;
+import de.wagnerj27.simplesword.dungeon.DungeonLevel;
+import de.wagnerj27.simplesword.dungeon.Tile;
+import de.wagnerj27.simplesword.entities.Player;
 
 public class MovementController {
 	

@@ -1,6 +1,6 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.dungeon;
 
-public class DungeonExit extends Tile {
+public class Stair extends Tile{
 
 	@Override
 	public boolean isWalkable() {

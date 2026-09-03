@@ -1,6 +1,11 @@
 
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.gui;
 
+import de.wagnerj27.simplesword.combat.Combat;
+import de.wagnerj27.simplesword.dungeon.DungeonLevel;
+import de.wagnerj27.simplesword.entities.Enemy;
+import de.wagnerj27.simplesword.entities.Player;
+import de.wagnerj27.simplesword.movement.MovementController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

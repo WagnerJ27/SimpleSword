@@ -1,4 +1,4 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.dungeon;
 
 public abstract class Tile {
 

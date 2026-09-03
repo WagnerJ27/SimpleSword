@@ -1,4 +1,4 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.entities;
 
 public class Enemy {
 	private int rewardEXP;

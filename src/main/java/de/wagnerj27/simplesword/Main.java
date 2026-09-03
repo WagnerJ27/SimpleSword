@@ -1,5 +1,6 @@
 package de.wagnerj27.simplesword;
 
+import de.wagnerj27.simplesword.gui.GameGUI;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

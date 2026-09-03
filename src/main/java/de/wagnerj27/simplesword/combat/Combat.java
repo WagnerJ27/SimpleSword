@@ -1,4 +1,7 @@
-package de.wagnerj27.simplesword;
+package de.wagnerj27.simplesword.combat;
+
+import de.wagnerj27.simplesword.entities.Enemy;
+import de.wagnerj27.simplesword.entities.Player;
 
 public class Combat {
 	Player player;
