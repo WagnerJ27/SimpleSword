@@ -9,14 +9,17 @@ public class Enemy {
 	private String name;
 	
 	public Enemy() {
-		name = "Bat";
-		rewardEXP = 10;
-		maxHP = 10;
-		currentHP = 10;
-		strength = 8;
-		defense = 2;
+	initializeBat();
 	}
 	
+private void initializeBat() {
+	name = "Bat";
+	rewardEXP = 10;
+	maxHP = 10;
+	currentHP = 10;
+	strength = 8;
+	defense = 2;
+}
 		public String getName() {
 			return name;
 		}

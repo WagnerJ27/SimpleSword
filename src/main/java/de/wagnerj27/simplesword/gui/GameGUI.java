@@ -112,6 +112,12 @@ public class GameGUI extends Application {
         // Create the player status label.
         playerStatus = new Label();
 
+        Label controls = new Label("W - forwards | A and D - Turn | P - Open character sheet");
+        controls.setTextFill(Color.WHITE);
+        controls.setAlignment(Pos.CENTER);
+        controls.setStyle("-fx-font-size: 24px;");
+        
+        
         // Update the player status.
         updatePlayerStatus();
 
@@ -128,10 +134,13 @@ public class GameGUI extends Application {
         root.setCenter(canvas);
 
         // Place the player status at the bottom.
-        root.setBottom(playerStatus);
+        root.setTop(playerStatus);
 
+        root.setBottom(controls);
+        
         // Center the player status.
         root.setAlignment(playerStatus, Pos.CENTER);
+        root.setAlignment(controls, Pos.CENTER);
 
         // Create the main scene.
         mainScene = new Scene(
@@ -192,13 +201,13 @@ public class GameGUI extends Application {
                 }
                 
                 // Start combat if movement succeeded and the random chance occurs.
-//                if (moved && shouldStartCombat()) {
-//
-//                    // Start combat.
-//                    combat(mainScene.getWindow() instanceof Stage
-//                            ? (Stage) mainScene.getWindow()
-//                            : null, player);
-//                }
+                if (moved && shouldStartCombat()) {
+
+                    // Start combat.
+                    combat(mainScene.getWindow() instanceof Stage
+                            ? (Stage) mainScene.getWindow()
+                            : null, player);
+                }
             }
 
             // Turn the player left when A is pressed.
@@ -220,7 +229,78 @@ public class GameGUI extends Application {
                 // Update the level rendering.
                 roomRenderer.render2D();
             }
+            
+            //Open the character sheet scene
+            if(event.getCode() == KeyCode.P) {
+            	showCharacterSheet(primaryStage,player);
+            }
         });
+    }
+    
+    private void showCharacterSheet(Stage stage, Player player) {
+    	BorderPane characterRoot = new BorderPane();
+    	
+    	Label characterSheet = new Label("Player sheet");
+    	Label exit = new Label("Press P to close this menu");
+    	
+    	Label level = new Label("Level: "+ player.getLevel());
+    	Label hP = new Label("HP: " + player.getCurrentHP() + "/ "+player.getMaxHP());
+    	Label strength = new Label("Strength: " + player.getStrength());
+    	Label defense = new Label("Defense: "+player.getDefense());
+    	Label exp = new Label("EXP: "+player.getEXP());
+    	
+    	
+    	VBox stats = new VBox();
+    	stats.getChildren().add(level);
+    	stats.getChildren().add(hP);
+    	stats.getChildren().add(strength);
+    	stats.getChildren().add(defense);
+    	stats.getChildren().add(exp);
+    	
+    	characterSheet.setTextFill(Color.WHITE);
+        exit.setTextFill(Color.WHITE);
+    	level.setTextFill(Color.WHITE);
+        hP.setTextFill(Color.WHITE);
+        strength.setTextFill(Color.WHITE);
+        defense.setTextFill(Color.WHITE);
+        exp.setTextFill(Color.WHITE);
+        
+        
+        stats.setAlignment(Pos.CENTER);
+        
+        characterSheet.setStyle("-fx-font-size: 24px;");
+        exit.setStyle("-fx-font-size: 24px;");
+        stats.setStyle("-fx-font-size: 24px;");
+    	
+    	characterRoot.setStyle("-fx-background-color: black;");
+    	
+    	
+    	characterRoot.setTop(characterSheet);
+    	characterRoot.setCenter(stats);
+    	characterRoot.setBottom(exit);
+    	
+    	characterRoot.setAlignment(characterSheet, Pos.CENTER);
+    	characterRoot.setAlignment(stats, Pos.CENTER);
+    	characterRoot.setAlignment(exit, Pos.CENTER);
+    	
+    	
+    	
+    	
+        // Create the combat scene.
+        Scene characterScene = new Scene(
+                characterRoot,
+                windowWidth,
+                windowHeight
+        );
+
+        characterScene.setOnKeyPressed(event ->{
+        	if(event.getCode() == KeyCode.P) {
+        		stage.setScene(mainScene);
+        	}
+        });
+
+        // Display the combat scene.
+        stage.setScene(characterScene);
     }
     
     private void loadLevel() {
