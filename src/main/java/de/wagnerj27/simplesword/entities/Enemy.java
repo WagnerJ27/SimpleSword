@@ -33,28 +33,28 @@ public class Enemy {
 	
 	private void initializeBat() {
 		name = "Bat";
-		rewardEXP = 10;
+		rewardEXP = 5;
 		maxHP = 10;
 		currentHP = 10;
-		strength = 1;
+		strength = 6;
 		defense = 2;
 	}
 
 	public void initializeSnake() {
 		name = "Snake";
-		rewardEXP = 10;
-		maxHP = 10;
-		currentHP = 10;
-		strength = 1;
+		rewardEXP = 5;
+		maxHP = 12;
+		currentHP = 12;
+		strength = 6;
 		defense = 2;
 	}
 	
 	private void initializeSpider() {
 		name = "Spider";
-		rewardEXP = 10;
-		maxHP = 10;
-		currentHP = 10;
-		strength = 1;
+		rewardEXP = 5;
+		maxHP = 11;
+		currentHP = 11;
+		strength = 6;
 		defense = 2;
 	}
 	
@@ -63,7 +63,7 @@ public class Enemy {
 		rewardEXP = 10;
 		maxHP = 10;
 		currentHP = 10;
-		strength = 1;
+		strength = 10;
 		defense = 2;
 	}
 	
@@ -72,17 +72,17 @@ public class Enemy {
 		rewardEXP = 10;
 		maxHP = 10;
 		currentHP = 10;
-		strength = 1;
-		defense = 2;
+		strength = 12;
+		defense = 7;
 	}
 	
 	private void initializeGoblinKing() {
 		name = "GoblinKing";
-		rewardEXP = 10;
-		maxHP = 10;
-		currentHP = 10;
-		strength = 1;
-		defense = 2;
+		rewardEXP = 50;
+		maxHP = 50;
+		currentHP = 50;
+		strength = 15;
+		defense = 15;
 	}
 
 		public String getName() {

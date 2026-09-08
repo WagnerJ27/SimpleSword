@@ -1,11 +1,13 @@
 package de.wagnerj27.simplesword.entities;
 
+import de.wagnerj27.simplesword.Inventory;
 import de.wagnerj27.simplesword.Position;
 import de.wagnerj27.simplesword.movement.Direction;
 
 public class Player {
 	private Position playerPosition;
 	private Direction playerDirection;
+	private Inventory inventory;
 	private int level;
 	private int exp;
 	private int maxHP;
@@ -16,6 +18,7 @@ public class Player {
 	public Player(int x, int y) {
 		playerPosition = new Position(x,y);
 		playerDirection = Direction.EAST;
+		inventory = new Inventory();
 		level = 1;
 		exp = 0;
 		maxHP = 20;
@@ -23,6 +26,31 @@ public class Player {
 		strength = 5;
 		defense = 5;
 		
+	}
+	
+	public Inventory getInventory() {
+
+	    return inventory;
+
+	}
+	
+	public boolean useHealingPotion() {
+
+	    if (currentHP >= maxHP) {
+	        return false;
+	    }
+
+	    if (!inventory.removeHealingPotion()) {
+	        return false;
+	    }
+
+	    currentHP += 10;
+
+	    if (currentHP > maxHP) {
+	        currentHP = maxHP;
+	    }
+
+	    return true;
 	}
 	
 	public Position getPosition() {
@@ -59,7 +87,7 @@ public class Player {
 	
 	public void takeDamage(Enemy enemy) {
 		if(enemy.getStrength() - defense<=0) {
-			return;
+			currentHP -=1;
 		}else {
 			currentHP = currentHP - (enemy.getStrength() -defense);
 		}
@@ -73,8 +101,8 @@ public class Player {
 		if(exp >=30) {
 			level +=1;
 			exp = 0;
-			strength +=2;
-			defense +=2;
+			strength +=1;
+			defense +=1;
 			maxHP +=5;
 			currentHP = maxHP;
 		}else {

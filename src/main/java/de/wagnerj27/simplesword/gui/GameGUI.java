@@ -115,7 +115,7 @@ public class GameGUI extends Application {
         // Create the player status label.
         playerStatus = new Label();
 
-        Label controls = new Label("W - forwards | A and D - Turn | P - Open character sheet | I - Open inventory");
+        Label controls = new Label("W - forwards | A and D - Turn | P - Open character sheet");
         controls.setTextFill(Color.WHITE);
         controls.setAlignment(Pos.CENTER);
         controls.setStyle("-fx-font-size: 24px;");
@@ -245,14 +245,14 @@ public class GameGUI extends Application {
     	BorderPane characterRoot = new BorderPane();
     	
     	Label characterSheet = new Label("Player sheet");
-    	Label exit = new Label("Press P to close this menu");
+    	Label exit = new Label("P - Exit this sceen | H - Use healing potion");
     	
     	Label level = new Label("Level: "+ player.getLevel());
     	Label hP = new Label("HP: " + player.getCurrentHP() + "/ "+player.getMaxHP());
     	Label strength = new Label("Strength: " + player.getStrength());
     	Label defense = new Label("Defense: "+player.getDefense());
     	Label exp = new Label("EXP: "+player.getEXP());
-    	
+    	Label healingPotions = new Label("Healing Potions: "+ player.getInventory().getHealingPotions());
     	
     	VBox stats = new VBox();
     	stats.getChildren().add(level);
@@ -260,6 +260,7 @@ public class GameGUI extends Application {
     	stats.getChildren().add(strength);
     	stats.getChildren().add(defense);
     	stats.getChildren().add(exp);
+    	stats.getChildren().add(healingPotions);
     	
     	characterSheet.setTextFill(Color.WHITE);
         exit.setTextFill(Color.WHITE);
@@ -268,7 +269,7 @@ public class GameGUI extends Application {
         strength.setTextFill(Color.WHITE);
         defense.setTextFill(Color.WHITE);
         exp.setTextFill(Color.WHITE);
-        
+        healingPotions.setTextFill(Color.WHITE);
         
         stats.setAlignment(Pos.CENTER);
         
@@ -303,6 +304,37 @@ public class GameGUI extends Application {
         characterScene.setOnKeyPressed(event ->{
         	if(event.getCode() == KeyCode.P) {
         		stage.setScene(mainScene);
+        	}
+        	if (event.getCode() == KeyCode.H) {
+
+        	    if (player.getInventory().getHealingPotions() <= 0) {
+
+        	        Alert alert =
+        	                new Alert(Alert.AlertType.INFORMATION);
+
+        	        alert.setTitle("Healing Potion");
+
+        	        alert.setHeaderText("No Healing Potion available");
+
+        	        alert.setContentText(
+        	                "You currently do not have a Healing Potion."
+        	        );
+
+        	        alert.show();
+
+        	    } else {
+
+        	        boolean potionUsed =
+        	                player.useHealingPotion();
+
+        	        if (potionUsed) {
+
+        	        	updatePlayerStatus();
+        	        	
+        	            showCharacterSheet(stage, player);
+
+        	        }
+        	    }
         	}
         });
 
