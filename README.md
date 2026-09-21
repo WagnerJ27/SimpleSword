@@ -18,7 +18,12 @@ The player must survive random enemy encounters, manage their health, and become
 
 The game uses a simple 2D tile-based representation of the dungeon.
 
----
+## Screenshots
+
+![Screenshot 1](screenshots/screenshot1.png)
+
+![Screenshot 2](screenshots/screenshot2.png)
+
 
 ## Features
 
